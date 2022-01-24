@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const {dbUser, dbPass, dbCluster, dbCollection} = require('../app/config');
 
 // atlas connection
 // mongoose.connect(MONGODB_URI);
@@ -10,7 +9,13 @@ const {dbUser, dbPass, dbCluster, dbCollection} = require('../app/config');
 // });
 
 // local, changed to production -> heroku
-mongoose.connect(process.env.MONGODB_URI);
+// mongoose.connect(process.env.MONGODB_URI);
+
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
 const db = mongoose.connection;
 
 db.on('open', () => {
